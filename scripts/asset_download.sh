@@ -31,3 +31,6 @@ fi
 
 rm -r ${DEVX_GIT_REPO_NAME}-master
 ls -al
+
+echo "APP_NAME=${APP_NAME}" >> $ARCHIVE_DIR/build.properties
+echo "DEVX_GIT_REPO_NAME=${DEVX_GIT_REPO_NAME}" >> $ARCHIVE_DIR/build.properties

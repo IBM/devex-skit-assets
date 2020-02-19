@@ -17,7 +17,7 @@ export DEVX_GIT_REPO_NAME=devex-skit-assets
 echo "Fetching deployment assets for skit ${SKIT_NAME}"
 # directory structure: REPO/deployment-assets/<skit-name>/<deploy-target>
 # can't seem to find an easy way to d/l a specific folder, so need to get the whole repo
-curl $DEVX_GIT_URL_CODE/tar.gz/master | tar -xz
+curl $DEVX_SKIT_ASSETS_GIT_URL/tar.gz/master | tar -xz
 ls -al
 ls -al ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}
 

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Push app
+export CF_APP=$APP_NAME-monitored-cf
 if ! cf app "$CF_APP"; then  
   cf push "$CF_APP" -f ./manifest.yaml
 else

@@ -23,7 +23,10 @@ ls -al
 ls -al ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}
 
 if [ "${DEPLOY_TARGET}" == "helm" ]; then mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ./chart; fi
-if [ "${DEPLOY_TARGET}" == "knative" ]; then mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml ./; fi
+if [ "${DEPLOY_TARGET}" == "knative" ]; then 
+    mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml ./;
+    mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./src/main/resources/;
+fi
 if [ "${DEPLOY_TARGET}" == "cf" ]; then 
     mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ./;
     mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./server/config/;

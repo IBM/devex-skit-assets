@@ -6,6 +6,7 @@ echo "kubectl version"
 kubectl version --client
 
 # Record git info
+export IMAGE_NAME=${APP_NAME}-monitored-helm
 echo "Build environment variables:"
 echo "REGISTRY_URL=${REGISTRY_URL}"
 echo "REGISTRY_NAMESPACE=${REGISTRY_NAMESPACE}"

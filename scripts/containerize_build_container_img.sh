@@ -4,6 +4,9 @@
 
 source ./build.properties
 
+export IMAGE_NAME=${APP_NAME}-monitored-helm
+echo "IMAGE_NAME=${IMAGE_NAME}" >> $ARCHIVE_DIR/build.properties
+
 # copy the script below into your app code repo (e.g. ./scripts/build_image.sh) and 'source' it from your pipeline job
 #    source ./scripts/build_image.sh
 # alternatively, you can source it from online script:

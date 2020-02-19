@@ -17,7 +17,7 @@ echo "DEPLOY_TARGET=${DEPLOY_TARGET}" >> $ARCHIVE_DIR/build.properties
 source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/asset_download.sh")
 
 # Record git info
-export IMAGE_NAME=${APP_NAME}-monitored-helm
+export IMAGE_NAME=${APP_NAME}-monitored-knative
 echo "Build environment variables:"
 echo "REGISTRY_URL=${REGISTRY_URL}"
 echo "REGISTRY_NAMESPACE=${REGISTRY_NAMESPACE}"

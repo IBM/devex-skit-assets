@@ -12,6 +12,7 @@ ls -al
 # expected URL structure: https://github.com/<org>/<skit-name>.git
 export SKIT_NAME=(${GIT_URL##*/})
 export SKIT_NAME=(${SKIT_NAME%%.*})
+export APP_NAME=${SKIT_NAME}
 export DEVX_GIT_REPO_NAME=devex-skit-assets
 
 echo "Fetching deployment assets for skit ${SKIT_NAME}"

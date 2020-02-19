@@ -1,7 +1,8 @@
 #!/bin/bash
-
 # uncomment to debug the script
 # set -x
+
+source ./build.properties
 
 # copy the script below into your app code repo (e.g. ./scripts/build_image.sh) and 'source' it from your pipeline job
 #    source ./scripts/build_image.sh

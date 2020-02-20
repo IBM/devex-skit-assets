@@ -17,7 +17,7 @@ if [ -f "$exp_test_path" ]; then
     fail_msg="Experience Test Failed"
     echo $fail_msg
     source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/pagerduty_alert.sh") "$fail_msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
-    fail_msg="$fail_msg :spinning-siren:"
+    fail_msg=":spinning-siren: $fail_msg"
     source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/slack_message.sh") "$fail_msg"
     exit 1
   fi
@@ -25,7 +25,7 @@ else
   msg="Experience Test script not found for skit $APP_NAME."
   echo $msg
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/pagerduty_alert.sh") "$msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
-  msg="$msg :spinning-siren:"
+  msg=":spinning-siren: $msg"
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/slack_message.sh") "$msg"
   exit 1
 fi

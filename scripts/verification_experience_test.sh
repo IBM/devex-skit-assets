@@ -1,13 +1,15 @@
 #!/bin/bash
 
-exp_test_path=./scripts/experience_test.sh
+exp_test_script=experience_test.sh
+exp_test_path=./scripts/$exp_test_script
 pd_evt_action=trigger
 pd_class="Skit Experience Test"
 pd_svc_name="DevX Skit Monitor"
 pd_severity=error
 
 if [ -f "$exp_test_path" ]; then
-  bash -c "$exp_test_path"
+  cd ./scripts
+  bash -c "$exp_test_script"
   if [ $? == 0 ]; then
     pass_msg="Experience Test Passed :white_check_mark:"
     echo $pass_msg

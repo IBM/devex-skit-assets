@@ -7,10 +7,13 @@ pd_class="Skit Experience Test"
 pd_svc_name="DevX Skit Monitor"
 pd_severity=error
 
+set -e
+EXIT_CODE=0
+
 if [ -f "$exp_test_path" ]; then
   cd ./scripts
-  source "./$exp_test_script"
-  if [ $? == 0 ]; then
+  source "./$exp_test_script" || EXIT_CODE=$?
+  if [ $EXIT_CODE == 0 ]; then
     pass_msg="Experience Test Passed :white_check_mark:"
     echo $pass_msg
     source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/slack_message.sh") "$pass_msg"

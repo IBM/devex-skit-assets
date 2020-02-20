@@ -22,10 +22,10 @@ if [ -f "$exp_test_path" ]; then
     exit 1
   fi
 else
-  msg="The '$exp_test_path' script was not found in the project's root folder. This script is required to pass verification."
+  msg="Experience Test script not found for skit $APP_NAME."
   echo $msg
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/pagerduty_alert.sh") "$msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
   fail_msg="$fail_msg :spinning-siren:"
-  exit 1
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/slack_message.sh") "$msg"
+  exit 1
 fi

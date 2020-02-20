@@ -2,13 +2,25 @@
 
 source build.properties
 
-# experience test script expected in one of the predefined locations. otherwise fail.
-#Invoke tests here
-var pass=true
-
-if [[ !pass ]]; do 
-  printenv
-  curl -X POST -H 'Content-type: application/json' --data '{"attachments": [{"text": "'"$IDS_JOB_NAME"' FAILED for '"$IDS_PROJECT_NAME"'! :spinning-siren:","color": "#3AA3E3","actions": [{"name": "game","text": "LOGS","type": "button","url": "https://cloud.ibm.com/devops/pipelines/'"$PIPELINE_ID"'/'"$PIPELINE_STAGE_ID"'/'"$IDS_JOB_ID"'?env_id=ibm:yp:us-south"}]}]}' $SLACK_WEBHOOK
+cd scripts/
+if [ -f "experience_test.sh" ]; then
+  ./experience_test.sh
+  if [ $? == 0 ]; then
+    pass_msg="Experience Test Passed"
+    echo $pass_msg
+    ./slack_message.sh $pass_msg
+    exit 0
+  else
+    fail_msg="Experience Test Failed"
+    echo $fail_msg
+    ./slack_message.sh $fail_msg
+    ./pagerduty_alert $fail_msg
+    exit 1
+  fi
+else
+  msg="The 'experience_test.sh' script was not found."
+  echo $msg
+  ./slack_message.sh $msg
+  ./pagerduty_alert.sh $msg 
   exit 1
 fi
-exit 0

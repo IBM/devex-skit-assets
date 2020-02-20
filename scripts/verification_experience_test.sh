@@ -25,7 +25,7 @@ else
   msg="Experience Test script not found for skit $APP_NAME."
   echo $msg
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/pagerduty_alert.sh") "$msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
-  fail_msg="$fail_msg :spinning-siren:"
+  msg="$msg :spinning-siren:"
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/slack_message.sh") "$msg"
   exit 1
 fi

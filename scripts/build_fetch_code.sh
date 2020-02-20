@@ -28,9 +28,4 @@ if jq -e '.services[] | select(.service_id=="draservicebroker")' _toolchain.json
     --buildnumber ${BUILD_NUMBER} --logicalappname ${IMAGE_NAME} --status pass
 fi
 
-echo "Directory * "
-pwd
-echo "ls -al *"
-ls -al
-
 source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/asset_download.sh")

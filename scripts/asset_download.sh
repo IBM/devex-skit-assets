@@ -25,11 +25,17 @@ ls -al ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARG
 if [ "${DEPLOY_TARGET}" == "helm" ]; then mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ./chart; fi
 if [ "${DEPLOY_TARGET}" == "knative" ]; then 
     mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml ./;
-    mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./src/main/resources/;
+    if [ -f "${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then 
+        # TODO determine target dir based on platform/language
+        mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./src/main/resources/;
+    fi
 fi
 if [ "${DEPLOY_TARGET}" == "cf" ]; then 
     mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ./;
-    mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./server/config/;
+    if [ -f "${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then
+        # TODO determine target dir based on platform/language
+        mv ${DEVX_GIT_REPO_NAME}-master/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./server/config/;
+    fi
 fi
 
 rm -r ${DEVX_GIT_REPO_NAME}-master

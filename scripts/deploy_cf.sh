@@ -24,6 +24,7 @@ fi
 # Export app name and URL for use in later Pipeline jobs
 export CF_APP_NAME="$CF_APP"
 export APP_URL=http://$(cf app $CF_APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
+echo "APP_URL=${APP_URL}" >> $ARCHIVE_DIR/build.properties
 
 # View logs
 cf logs "${CF_APP}" --recent

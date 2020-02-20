@@ -116,6 +116,8 @@ fi
 echo "Application is available"
 echo "=========================================================="
 echo -e "View the application at: $APPLICATION_URL"
+export APP_URL=$APPLICATION_URL
+echo "APP_URL=${APP_URL}" >> $ARCHIVE_DIR/build.properties
 
 echo "export IP_ADDR=${IP_ADDR}" >> kube_vars.sh
 echo "export PORT=${PORT}" >> kube_vars.sh

@@ -8,7 +8,7 @@ spec:
       containers:
         - image: 'REGISTRY_URL/REGISTRY_NAMESPACE/IMAGE_NAME:BUILD_NUMBER'
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
           env:
             - name: service_cloudant
               valueFrom:

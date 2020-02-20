@@ -121,3 +121,6 @@ echo "APP_URL=${APP_URL}" >> $ARCHIVE_DIR/build.properties
 
 echo "export IP_ADDR=${IP_ADDR}" >> kube_vars.sh
 echo "export PORT=${PORT}" >> kube_vars.sh
+
+# copy build props to root dir build props
+cat $ARCHIVE_DIR/build.properties >> ./build.properties

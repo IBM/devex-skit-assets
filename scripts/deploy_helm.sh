@@ -17,3 +17,6 @@ ls -al
 source <(curl -sSL "https://raw.githubusercontent.com/open-toolchain/commons/master/scripts/check_and_deploy_helm.sh")
 
 echo "APP_URL=${APP_URL}" >> $ARCHIVE_DIR/build.properties
+
+# copy build props to root dir build props
+cat $ARCHIVE_DIR/build.properties >> ./build.properties

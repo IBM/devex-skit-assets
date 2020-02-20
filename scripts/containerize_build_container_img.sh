@@ -23,4 +23,3 @@ ls -al
 
 # copy build props to root dir build props
 cat $ARCHIVE_DIR/build.properties >> ./build.properties
-cat build.properties

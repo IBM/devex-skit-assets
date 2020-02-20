@@ -26,5 +26,8 @@ export CF_APP_NAME="$CF_APP"
 export APP_URL=http://$(cf app $CF_APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
 echo "APP_URL=${APP_URL}" >> $ARCHIVE_DIR/build.properties
 
+# copy build props to root dir build props
+cat $ARCHIVE_DIR/build.properties >> ./build.properties
+
 # View logs
 cf logs "${CF_APP}" --recent

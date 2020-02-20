@@ -9,7 +9,7 @@ pd_severity=error
 
 if [ -f "$exp_test_path" ]; then
   cd ./scripts
-  bash -c "$exp_test_script"
+  bash -c "./$exp_test_script"
   if [ $? == 0 ]; then
     pass_msg="Experience Test Passed :white_check_mark:"
     echo $pass_msg

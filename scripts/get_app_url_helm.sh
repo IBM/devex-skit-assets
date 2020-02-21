@@ -62,6 +62,13 @@ if [ -z "$RELEASE_NAME" ]; then
 fi
 echo -e "Release name: ${RELEASE_NAME}"
 
+echo ""
+echo "=========================================================="
+echo "DEPLOYMENTS:"
+echo ""
+echo -e "Status for release:${RELEASE_NAME}"
+helm status ${HELM_TLS_OPTION} ${RELEASE_NAME}
+
 # Extract app name from helm release
 echo "=========================================================="
 APP_NAME=$( helm get ${HELM_TLS_OPTION} ${RELEASE_NAME} | yq read -d'*' --tojson - | jq -r | jq -r --arg image "$IMAGE_REPOSITORY:$IMAGE_TAG" '.[] | select (.kind=="Deployment") | . as $adeployment | .spec?.template?.spec?.containers[]? | select (.image==$image) | $adeployment.metadata.labels.app' )

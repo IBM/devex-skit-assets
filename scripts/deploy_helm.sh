@@ -1,9 +1,6 @@
 #!/bin/bash
-
-# uncomment to debug the script
+# uncomment to debug the script wherever it is used
 # set -x
-
-ls -al
 
 # copy the script below into your app code repo (e.g. ./scripts/check_and_deploy_helm.sh) and 'source' it from your pipeline job
 #    source ./scripts/check_and_deploy_helm.sh

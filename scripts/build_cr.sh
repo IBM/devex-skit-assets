@@ -1,4 +1,6 @@
 #!/bin/bash
+# uncomment to debug the script wherever it is used
+# set -x
 
 mkdir downloads
 PATH="downloads:$PATH"

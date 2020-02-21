@@ -1,4 +1,6 @@
 #!/bin/bash
+# uncomment to debug the script wherever it is used
+# set -x
 
 # Push app
 export CF_APP=$APP_NAME-monitored-cf

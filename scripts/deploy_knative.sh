@@ -1,8 +1,8 @@
 #!/bin/bash
-export PATH="downloads:$PATH"
+# uncomment to debug the script wherever it is used
+# set -x
 
-# View build properties
-cat build.properties
+export PATH="downloads:$PATH"
 
 echo "Check cluster availability"
 IP_ADDR=$(ibmcloud cs workers ${PIPELINE_KUBERNETES_CLUSTER_NAME} | grep normal | head -n 1 | awk '{ print $2 }')

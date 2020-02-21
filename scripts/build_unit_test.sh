@@ -1,5 +1,7 @@
 #!/bin/bash
+# uncomment to debug the script wherever it is used
 # set -x
+
 if [ -f ./tests/run-tests.sh ]; then
   source ./tests/run-tests.sh
   RESULT=$?

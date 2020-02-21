@@ -1,6 +1,7 @@
 #!/bin/bash
-# uncomment to debug the script
+# uncomment to debug the script wherever it is used
 # set -x
+
 # copy the script below into your app code repo (e.g. ./scripts/check_vulnerabilities.sh) and 'source' it from your pipeline job
 #    source ./scripts/check_vulnerabilities.sh
 # alternatively, you can source it from online script:

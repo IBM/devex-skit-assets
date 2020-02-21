@@ -1,5 +1,8 @@
 #!/bin/bash
+# uncomment to debug the script wherever it is used
 # set -x
+
+# NOTE: When used in a DevOps toolchain, this script will only work in a deployer type job configured for kubernetes deployment.
 
 export SERVICE_FILE="service.yaml"
 

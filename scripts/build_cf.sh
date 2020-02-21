@@ -1,4 +1,5 @@
 #!/bin/bash
+# uncomment to debug the script wherever it is used
 # set -x
 
 # Git repo cloned at $WORKING_DIR, copy into $ARCHIVE_DIR

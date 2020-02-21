@@ -1,8 +1,6 @@
 #!/bin/bash
-# uncomment to debug the script
+# uncomment to debug the script wherever it is used
 # set -x
-
-source ./build.properties
 
 export IMAGE_NAME=${APP_NAME}-monitored-helm
 echo "IMAGE_NAME=${IMAGE_NAME}" >> ./build.properties

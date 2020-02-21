@@ -1,3 +1,7 @@
+#!/bin/bash
+# uncomment to debug the script wherever it is used
+# set -x
+
 export PATH="downloads:$PATH"
 
 echo "Listing all Knative services..."

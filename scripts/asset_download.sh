@@ -1,5 +1,6 @@
 #!/bin/bash
-set -x
+# uncomment to debug the script wherever it is used
+# set -x
 
 # This script expects the GIT_URL env var to contain the URL to the skit git repo,
 # from which the deployment assets folder will be extracted.

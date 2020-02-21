@@ -1,4 +1,6 @@
 #!/bin/bash
+# uncomment to debug the script wherever it is used
+# set -x
 
 exp_test_script=experience_test.sh
 exp_test_path=./scripts/$exp_test_script

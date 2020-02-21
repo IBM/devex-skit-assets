@@ -7,6 +7,13 @@ pd_class="Skit Experience Test"
 pd_svc_name="DevX Skit Monitor"
 pd_severity=error
 
+# app URL isnt getting propagated from previous stages for some reason, so have to figure it out here
+if [ "$DEPLOY_TARGET" == "cf"]; then 
+  export CF_APP_NAME=$APP_NAME-monitored-cf
+  export APP_URL=http://$(cf app $CF_APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
+fi
+echo "The APP_URL is: $APP_URL"
+
 set -e
 EXIT_CODE=0
 

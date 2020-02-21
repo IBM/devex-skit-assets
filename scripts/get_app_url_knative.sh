@@ -1,6 +1,8 @@
 #!/bin/bash
 # set -x
 
+export SERVICE_FILE="service.yaml"
+
 echo "Check cluster availability"
 IP_ADDR=$(ibmcloud cs workers ${PIPELINE_KUBERNETES_CLUSTER_NAME} | grep normal | head -n 1 | awk '{ print $2 }')
 if [ -z $IP_ADDR ]; then

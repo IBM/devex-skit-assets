@@ -15,7 +15,7 @@ fi
 if [ "$DEPLOY_TARGET" == "helm" ]; then
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/get_app_url_helm.sh")
 fi
-if [ "$DEPLOY_TARGET" == "knative"]; then
+if [ "$DEPLOY_TARGET" == "knative" ]; then
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/get_app_url_knative.sh")
 fi
 echo "The APP_URL is: $APP_URL"

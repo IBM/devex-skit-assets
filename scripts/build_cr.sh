@@ -12,7 +12,7 @@ source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/set_skit_env.sh")
 
 source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/asset_download.sh")
 # temp delete service.yaml to break knative deploy
-rm -f devex-skit-assets-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml
+rm -f ./service.yaml
 
 # Record git info
 export IMAGE_NAME=${APP_NAME}-monitored-knative

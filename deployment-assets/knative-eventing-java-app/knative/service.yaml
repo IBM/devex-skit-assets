@@ -1,5 +1,5 @@
 apiVersion: serving.knative.dev/v1alpha1
-kind: Servic
+kind: Service
 metadata:
   name: knative-eventing-java-app-monitored-knative
 spec:

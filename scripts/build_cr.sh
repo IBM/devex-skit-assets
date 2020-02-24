@@ -7,14 +7,8 @@ PATH="downloads:$PATH"
 echo "kubectl version"
 kubectl version --client
 
-# Git repo cloned at $WORKING_DIR, copy into $ARCHIVE_DIR
-mkdir -p $ARCHIVE_DIR
-cp -R -n ./ $ARCHIVE_DIR/ || true
-
-echo "GIT_URL=${GIT_URL}" >> $ARCHIVE_DIR/build.properties
-echo "GIT_BRANCH=${GIT_BRANCH}" >> $ARCHIVE_DIR/build.properties
-echo "GIT_COMMIT=${GIT_COMMIT}" >> $ARCHIVE_DIR/build.properties
-echo "DEPLOY_TARGET=${DEPLOY_TARGET}" >> $ARCHIVE_DIR/build.properties
+# setup common env variables
+source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/set_skit_env.sh")
 
 source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/asset_download.sh")
 

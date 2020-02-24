@@ -7,16 +7,10 @@ PATH="downloads:$PATH"
 echo "kubectl version"
 kubectl version --client
 
-# Git repo cloned at $WORKING_DIR, copy into $ARCHIVE_DIR
-mkdir -p $ARCHIVE_DIR
-cp -R -n ./ $ARCHIVE_DIR/ || true
+# setup common env variables
+source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/set_skit_env.sh")
 
-echo "GIT_URL=${GIT_URL}" >> $ARCHIVE_DIR/build.properties
-echo "GIT_BRANCH=${GIT_BRANCH}" >> $ARCHIVE_DIR/build.properties
-echo "GIT_COMMIT=${GIT_COMMIT}" >> $ARCHIVE_DIR/build.properties
-echo "DEPLOY_TARGET=${DEPLOY_TARGET}" >> $ARCHIVE_DIR/build.properties
-
-source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/master/scripts/asset_download.sh")
+source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/asset_download.sh")
 
 # Record git info
 export IMAGE_NAME=${APP_NAME}-monitored-knative

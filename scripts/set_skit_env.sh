@@ -33,4 +33,4 @@ if [ "$DEPLOY_TARGET" == "knative" ]; then
 fi
 
 echo "File 'build.properties' created for passing env variables to subsequent pipeline jobs:"
-cat ./build.properties
+cat ./build.properties | grep -v -i password

@@ -12,6 +12,7 @@ ls -al
 
 # expected URL structure: https://github.com/<org>/<skit-name>.git
 export SKIT_NAME=(${GIT_URL##*/})
+export SKIT_URL=(${GIT_URL%%.git}) # strips .git off the end
 export SKIT_NAME=(${SKIT_NAME%%.*})
 export APP_NAME=${SKIT_NAME}
 export DEVX_GIT_REPO_NAME=devex-skit-assets
@@ -24,14 +25,33 @@ ls -al
 ls -al ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}
 
 if [ "${DEPLOY_TARGET}" == "helm" ]; then mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ./chart; fi
-if [ "${DEPLOY_TARGET}" == "knative" ]; then 
+if [ "${DEPLOY_TARGET}" == "knative" ]; then
     mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml ./;
-    if [ -f "${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then 
+    if [ -f "${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then
         # TODO determine target dir based on platform/language
-        mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./src/main/resources/;
+        platform=$(curl --silent "https://cloud.ibm.com/developer/api/applications/v1/starters" | jq --unbuffered --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
+        case "$platform" in
+          "django") echo "django mappings"
+                    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./src/main/resources/;
+          ;;
+          "python") echo "python mappings"
+          ;;
+          "swift") echo "swift mappings"
+          ;;
+          "java") echo "java mappings"
+          ;;
+          "spring") echo "spring mappings"
+          ;;
+          "node") echo "node mappings"
+          ;;
+          *) echo "FAILED TO PLACE mappings.json"
+             exit 1
+
+        esac
+
     fi
 fi
-if [ "${DEPLOY_TARGET}" == "cf" ]; then 
+if [ "${DEPLOY_TARGET}" == "cf" ]; then
     mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ./;
     if [ -f "${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then
         # TODO determine target dir based on platform/language

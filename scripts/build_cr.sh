@@ -75,7 +75,7 @@ echo "DEVX_SKIT_ASSETS_GIT_URL_RAW=${DEVX_SKIT_ASSETS_GIT_URL_RAW}" >> $ARCHIVE_
 echo "DEVX_SKIT_ASSETS_GIT_URL_CODE=${DEVX_SKIT_ASSETS_GIT_URL_CODE}" >> $ARCHIVE_DIR/build.properties
 
 echo "File 'build.properties' created for passing env variables to subsequent pipeline jobs:"
-cat $ARCHIVE_DIR/build.properties
+cat $ARCHIVE_DIR/build.properties | grep -v -i password
 
 echo "Copy pipeline scripts along with the build"
 # Copy scripts (incl. deploy scripts)

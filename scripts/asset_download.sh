@@ -24,18 +24,6 @@ curl $DEVX_SKIT_ASSETS_GIT_URL_CODE | tar -xz
 ls -al
 ls -al ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}
 
-#if [ "${DEPLOY_TARGET}" == "helm" ]; then
-#    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ./chart;
-#fi
-
-#if [ "${DEPLOY_TARGET}" == "knative" ]; then
-#    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml ./;
-#fi
-
-#if [ "${DEPLOY_TARGET}" == "cf" ]; then
-#    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ./;
-#fi
-
 case "$DEPLOY_TARGET" in
     helm) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ./chart
     ;;
@@ -47,8 +35,9 @@ case "$DEPLOY_TARGET" in
        exit 1
 esac
 
+# If we have a mappings json, we need to make sure it goes to the right place for the respective language
 if [ -f "${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then
-    # TODO determine target dir based on platform/language
+
     platform=$(curl --silent "https://cloud.ibm.com/developer/api/applications/v1/starters" | jq --unbuffered -r --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
     case "$platform" in
       python | django | node) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./server/config/

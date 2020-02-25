@@ -24,41 +24,42 @@ curl $DEVX_SKIT_ASSETS_GIT_URL_CODE | tar -xz
 ls -al
 ls -al ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}
 
-if [ "${DEPLOY_TARGET}" == "helm" ]; then mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ./chart; fi
-if [ "${DEPLOY_TARGET}" == "knative" ]; then
-    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml ./;
-    if [ -f "${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then
-        # TODO determine target dir based on platform/language
-        platform=$(curl --silent "https://cloud.ibm.com/developer/api/applications/v1/starters" | jq --unbuffered -r --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
-        echo "$platform"
-        case "$platform" in
-          django) echo "django mappings"
+#if [ "${DEPLOY_TARGET}" == "helm" ]; then
+#    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ./chart;
+#fi
 
-          ;;
-          python) echo "python mappings"
-          ;;
-          swift) echo "swift mappings"
-          ;;
-          java) echo "java mappings"
-          ;;
-          spring) echo "spring mappings"
-                    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./src/main/resources/;
-          ;;
-          node) echo "node mappings"
-          ;;
-          *) echo "FAILED TO PLACE mappings.json"
-             exit 1
+#if [ "${DEPLOY_TARGET}" == "knative" ]; then
+#    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml ./;
+#fi
 
-        esac
+#if [ "${DEPLOY_TARGET}" == "cf" ]; then
+#    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ./;
+#fi
 
-    fi
-fi
-if [ "${DEPLOY_TARGET}" == "cf" ]; then
-    mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ./;
-    if [ -f "${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then
-        # TODO determine target dir based on platform/language
-        mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./server/config/;
-    fi
+case "$DEPLOY_TARGET" in
+    helm) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ./chart
+    ;;
+    cf) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ./
+    ;;
+    knative) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml ./
+    ;;
+    *) echo "FAILED TO PLACE helm chart, manifest.yaml, or service.yaml"
+       exit 1
+esac
+
+if [ -f "${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then
+    # TODO determine target dir based on platform/language
+    platform=$(curl --silent "https://cloud.ibm.com/developer/api/applications/v1/starters" | jq --unbuffered -r --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
+    case "$platform" in
+      python | django | node) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./server/config/
+      ;;
+      swift) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./config/;
+      ;;
+      spring | java) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./src/main/resources/;
+      ;;
+      *) echo "FAILED TO PLACE mappings.json"
+         exit 1
+    esac
 fi
 
 rm -r ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}

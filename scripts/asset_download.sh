@@ -32,19 +32,19 @@ if [ "${DEPLOY_TARGET}" == "knative" ]; then
         platform=$(curl --silent "https://cloud.ibm.com/developer/api/applications/v1/starters" | jq --unbuffered -r --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
         echo "$platform"
         case "$platform" in
-          "django") echo "django mappings"
+          django) echo "django mappings"
 
           ;;
-          "python") echo "python mappings"
+          python) echo "python mappings"
           ;;
-          "swift") echo "swift mappings"
+          swift) echo "swift mappings"
           ;;
-          "java") echo "java mappings"
+          java) echo "java mappings"
           ;;
-          "spring") echo "spring mappings"
+          spring) echo "spring mappings"
                     mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_BRANCH}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./src/main/resources/;
           ;;
-          "node") echo "node mappings"
+          node) echo "node mappings"
           ;;
           *) echo "FAILED TO PLACE mappings.json"
              exit 1

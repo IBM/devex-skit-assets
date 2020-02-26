@@ -1,0 +1,13 @@
+---
+applications:
+- instances: 1
+  timeout: 180
+  name: meanappmonitoredcf
+  buildpack: sdk-for-nodejs
+  command: NODE_ENV=production npm start
+  disk_quota: 1G
+  memory: 128MB
+  domain: mybluemix.net
+  host: mean-app-monitored-cf
+  env:
+    NPM_CONFIG_PRODUCTION : false

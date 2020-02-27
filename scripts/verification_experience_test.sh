@@ -31,7 +31,7 @@ if [ -f "$exp_test_path" ]; then
   if [ $EXIT_CODE == 0 ]; then
     pass_msg="Skit Experience Test Passed :white_check_mark:"
     echo $pass_msg
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$pass_msg"
+    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$pass_msg" "false"
     exit 0
   else
     fail_msg="Skit Experience Test Failed"

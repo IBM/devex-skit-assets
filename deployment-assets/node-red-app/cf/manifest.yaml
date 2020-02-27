@@ -10,4 +10,4 @@ applications:
   domain: mybluemix.net
   host: node-red-app-monitored-cf
   services:
-    - governator-cloudant-6903
+    - governator-cloudant

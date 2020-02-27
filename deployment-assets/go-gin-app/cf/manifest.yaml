@@ -7,6 +7,6 @@ applications:
   disk_quota: 1G
   memory: 128MB
   domain: mybluemix.net
-  host: go-gin-app-monitored-cf
+  host: go-gin-app-devx-monitored-cf
   env:
     GOPACKAGENAME : goginappmonitoredcf

@@ -8,6 +8,6 @@ applications:
   disk_quota: 1G
   memory: 128MB
   domain: mybluemix.net
-  host: mern-app-monitored-cf
+  host: mern-app-devx-monitored-cf
   env:
     NPM_CONFIG_PRODUCTION : false

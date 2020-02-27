@@ -8,4 +8,4 @@ applications:
   disk_quota: 1G
   memory: 128MB
   domain: mybluemix.net
-  host: nodejs-express-app-monitored-cf
+  host: nodejs-express-app-devx-monitored-cf

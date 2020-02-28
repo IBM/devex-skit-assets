@@ -11,7 +11,7 @@ export TEXT="$IDS_JOB_NAME - $SLACK_MSG - Project: $IDS_PROJECT_NAME. Deployment
 if [ "${INCLUDE_LOGS}" == "true" ]; then
     curl -v POST --data-urlencode 'payload={"channel": "#'"$OWNER_SLACK_CHANNEL"'", 
                                     "username": "DevX Skit Monitor", 
-                                    "text": "'"$TEXT"'", 
+                                    "text": "@here '"$TEXT"'", 
                                     "attachments": [
                                         {
                                             "pretext": "Visit the URL below to see the logs for this run.",

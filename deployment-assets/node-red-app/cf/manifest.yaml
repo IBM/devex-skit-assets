@@ -8,6 +8,6 @@ applications:
   disk_quota: 1G
   memory: 128MB
   domain: mybluemix.net
-  host: node-red-app-monitored-cf
+  host: node-red-app-devx-monitored-cf
   services:
     - governator-cloudant

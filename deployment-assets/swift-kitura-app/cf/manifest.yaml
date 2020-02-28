@@ -8,6 +8,6 @@ applications:
   disk_quota: 1G
   memory: 128MB
   domain: mybluemix.net
-  host: swift-kitura-app-monitored-cf
+  host: swift-kitura-app-devx-monitored-cf
   env:
     SWIFT_BUILD_DIR_CACHE : false

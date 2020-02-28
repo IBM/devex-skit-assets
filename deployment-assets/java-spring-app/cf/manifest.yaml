@@ -8,4 +8,4 @@ applications:
   disk_quota: 1G
   memory: 1024M
   domain: mybluemix.net
-  host: java-spring-app-monitored-cf
+  host: java-spring-app-devx-monitored-cf

@@ -8,4 +8,4 @@ applications:
   disk_quota: 1G
   memory: 512MB
   domain: mybluemix.net
-  host: java-liberty-app-monitored-cf
+  host: java-liberty-app-devx-monitored-cf

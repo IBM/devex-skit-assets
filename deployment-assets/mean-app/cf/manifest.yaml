@@ -8,6 +8,6 @@ applications:
   disk_quota: 1G
   memory: 128MB
   domain: mybluemix.net
-  host: mean-app-monitored-cf
+  host: mean-app-devx-monitored-cf
   env:
     NPM_CONFIG_PRODUCTION : false

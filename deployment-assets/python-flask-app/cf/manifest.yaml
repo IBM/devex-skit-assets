@@ -8,7 +8,7 @@ applications:
   disk_quota: 1G
   memory: 128MB
   domain: mybluemix.net
-  host: python-flask-monitored-cf
+  host: python-flask-devx-monitored-cf
   env:
     FLASK_APP : server
     FLASK_DEBUG : false

@@ -12,6 +12,7 @@ if [ "${INCLUDE_LOGS}" == "true" ]; then
     curl -v POST --data-urlencode 'payload={"channel": "#'"$OWNER_SLACK_CHANNEL"'", 
                                     "username": "DevX Skit Monitor", 
                                     "text": "@here '"$TEXT"'", 
+                                    "link_names": "true",
                                     "attachments": [
                                         {
                                             "pretext": "Visit the URL below to see the logs for this run.",

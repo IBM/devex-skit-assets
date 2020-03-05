@@ -3,7 +3,7 @@
 # set -x
 
 # setup common env variables
-source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/set_skit_env.sh")
+source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/$DEVX_SKIT_ASSETS_VERSION/set_skit_env.sh")
 
 # check if doi is integrated in this toolchain
 if jq -e '.services[] | select(.service_id=="draservicebroker")' _toolchain.json; then
@@ -13,4 +13,4 @@ if jq -e '.services[] | select(.service_id=="draservicebroker")' _toolchain.json
     --buildnumber ${BUILD_NUMBER} --logicalappname ${IMAGE_NAME} --status pass
 fi
 
-source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/asset_download.sh")
+source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/$DEVX_SKIT_ASSETS_VERSION/asset_download.sh")

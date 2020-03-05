@@ -15,10 +15,10 @@ if [ "$DEPLOY_TARGET" == "cf" ]; then
   export APP_URL=http://$(cf app $CF_APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
 fi
 if [ "$DEPLOY_TARGET" == "helm" ]; then
-  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/get_app_url_helm.sh")
+  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/$DEVX_SKIT_ASSETS_VERSION/get_app_url_helm.sh")
 fi
 if [ "$DEPLOY_TARGET" == "knative" ]; then
-  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/get_app_url_knative.sh")
+  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/$DEVX_SKIT_ASSETS_VERSION/get_app_url_knative.sh")
 fi
 echo "The APP_URL is: $APP_URL"
 
@@ -31,21 +31,21 @@ if [ -f "$exp_test_path" ]; then
   if [ $EXIT_CODE == 0 ]; then
     pass_msg="Skit Experience Test Passed :white_check_mark:"
     echo $pass_msg
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$pass_msg" "false"
+    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/$DEVX_SKIT_ASSETS_VERSION/slack_message.sh") "$pass_msg" "false"
     exit 0
   else
     fail_msg="Skit Experience Test Failed"
     echo $fail_msg
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$fail_msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
+    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/$DEVX_SKIT_ASSETS_VERSION/pagerduty_alert.sh") "$fail_msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
     fail_msg="$fail_msg :spinning-siren:"
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
+    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/$DEVX_SKIT_ASSETS_VERSION/slack_message.sh") "$fail_msg"
     exit 1
   fi
 else
   msg="Skit Experience Test script not found for skit $APP_NAME."
   echo $msg
-  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
+  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/$DEVX_SKIT_ASSETS_VERSION/pagerduty_alert.sh") "$msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
   msg="$msg :spinning-siren:"
-  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$msg"
+  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/$DEVX_SKIT_ASSETS_VERSION/slack_message.sh") "$msg"
   exit 1
 fi

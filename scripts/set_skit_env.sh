@@ -9,8 +9,7 @@ echo "GIT_COMMIT=${GIT_COMMIT}" >> ./build.properties
 echo "SOURCE_BUILD_NUMBER=${BUILD_NUMBER}" >> ./build.properties
 
 echo "DEVX_SKIT_ASSETS_GIT=${DEVX_SKIT_ASSETS_GIT}" >> ./build.properties
-echo "DEVX_SKIT_ASSETS_GIT_BRANCH=${DEVX_SKIT_ASSETS_GIT_BRANCH}" >> ./build.properties
-echo "DEVX_SKIT_ASSETS_VERSION=${DEVX_SKIT_ASSETS_VERSION}" >> ./build.properties
+echo "DEVX_SKIT_ASSETS_GIT_RELEASE=${DEVX_SKIT_ASSETS_GIT_RELEASE}" >> ./build.properties
 echo "DEVX_SKIT_ASSETS_GIT_URL=${DEVX_SKIT_ASSETS_GIT_URL}" >> ./build.properties
 echo "DEVX_SKIT_ASSETS_GIT_URL_RAW=${DEVX_SKIT_ASSETS_GIT_URL_RAW}" >> ./build.properties
 echo "DEVX_SKIT_ASSETS_GIT_URL_CODE=${DEVX_SKIT_ASSETS_GIT_URL_CODE}" >> ./build.properties

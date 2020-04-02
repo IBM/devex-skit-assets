@@ -56,7 +56,7 @@ do
     if [ "$STATUS" == "failed" ]; then
         echo "Pipeline run failed!"
         break
-    elif [ "$STATUS" == "succeeded" ]
+    elif [ "$STATUS" == "succeeded" ]; then
         echo "Pipeline run is finished!"
         SUCCESS="true"
         break

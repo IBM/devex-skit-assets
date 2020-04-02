@@ -53,12 +53,15 @@ do
     STATUS=${TEMP}
     echo "Pipeline run status: $STATUS"
 
-    if [ "$STATUS" != "succeeded" ]; then
-        echo "Pipeline run is not finished, retrying after waiting..."
-    else
+    if [ "$STATUS" == "failed" ]; then
+        echo "Pipeline run failed!"
+        break
+    elif [ "$STATUS" == "succeeded" ]
         echo "Pipeline run is finished!"
         SUCCESS="true"
         break
+    else
+        echo "Pipeline run is not finished, retrying after waiting..."
     fi
 done
 

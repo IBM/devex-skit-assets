@@ -4,24 +4,28 @@
 
 function register_skit {
     OUT_FILE_RUN=run-pipeline-output.txt
+    export SKIT_NAME=(${GIT_URL##*/})
+    export SKIT_URL=(${GIT_URL%%.git}) # strips .git off the end
+    export SKIT_NAME=(${SKIT_NAME%%.*})
 
-    echo "Triggering starter kit registration..."
+    echo "Repository URL: $GIT_URL"
+    echo "Triggering starter kit registration for $SKIT_NAME"
     curl -s -X POST \
-    ${SKIT_REG_ENDPOINT} \
-    -H 'cache-control: no-cache' \
-    -H 'content-type: application/json' \
-    -H 'x-auth-token: '${SKIT_REG_AUTH_TOKEN}'' \
-    -d '{
-    "ref": "refs/heads/'${GIT_BRANCH}'",
-    "after": "'${GIT_COMMIT}'",
-    "repository": {
-        "name": "'${APP_NAME}'",
-        "full_name": "IBM/'${APP_NAME}'",
-        "url": "https://github.com/IBM/'${APP_NAME}'",
-        "html_url": "https://github.com/IBM/'${APP_NAME}'",
-        "statuses_url": "https://api.github.com/repos/IBM/'${APP_NAME}'/statuses/{sha}"
-    },
-    "skit_verified": "true"
+        ${SKIT_REG_ENDPOINT} \
+        -H 'cache-control: no-cache' \
+        -H 'content-type: application/json' \
+        -H 'x-auth-token: '${SKIT_REG_AUTH_TOKEN}'' \
+        -d '{
+        "ref": "refs/heads/'${GIT_BRANCH}'",
+        "after": "'${GIT_COMMIT}'",
+        "repository": {
+            "name": "'${APP_NAME}'",
+            "full_name": "IBM/'${APP_NAME}'",
+            "url": "https://github.com/IBM/'${APP_NAME}'",
+            "html_url": "https://github.com/IBM/'${APP_NAME}'",
+            "statuses_url": "https://api.github.com/repos/IBM/'${APP_NAME}'/statuses/{sha}"
+        },
+        "skit_verified": "true"
     }' >> $OUT_FILE_RUN
 
     echo ""

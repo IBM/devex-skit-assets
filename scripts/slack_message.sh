@@ -12,14 +12,14 @@ if [[ -n $APP_URL ]]; then
 fi
 
 if [ "${NOTIFY}" == "true" ]; then
-    curl -v POST --data-urlencode 'payload={"channel": "#'"$OWNER_SLACK_CHANNEL"'", 
+    curl -s -X POST --data-urlencode 'payload={"channel": "#'"$OWNER_SLACK_CHANNEL"'", 
                                     "username": "DevX Skit Monitor", 
                                     "text": "'"$TEXT"' @here", 
                                     "link_names": "true",
                                     "attachments": [], "icon_emoji": ":police_car:"}' \
     $SLACK_WEBHOOK
 else
-    curl -v POST --data-urlencode 'payload={"channel": "#'"$OWNER_SLACK_CHANNEL"'", 
+    curl -s -X POST --data-urlencode 'payload={"channel": "#'"$OWNER_SLACK_CHANNEL"'", 
                                     "username": "DevX Skit Monitor", 
                                     "text": "'"$TEXT"'", 
                                     "attachments": [], "icon_emoji": ":police_car:"}' \

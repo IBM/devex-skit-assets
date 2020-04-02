@@ -70,9 +70,9 @@ function register_skit {
 
     if [ "$SUCCESS" == "false" ]; then
         echo "Registration failed. Check the registration pipeline logs for details."
-        return 1
+        export REG_EXIT=1
     else
         echo "Skit registration succeeded!"
-        return 0
+        export REG_EXIT=0
     fi
 }

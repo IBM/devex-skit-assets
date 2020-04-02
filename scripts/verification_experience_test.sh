@@ -56,8 +56,8 @@ EXIT_CODE=0
 if [ "$PASSED" == "true" ]; then
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/skit_registration.sh")
   echo "Beginning skit registration..."
-  EXIT_CODE=$(register_skit)
-  if [ $EXIT_CODE != 0 ]; then
+  register_skit
+  if [ $REG_EXIT != 0 ]; then
     msg="Skit registration failed. Check the Tekton registration pipeline logs for details."
     fail_msg="$msg :spinning-siren:"
     source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"

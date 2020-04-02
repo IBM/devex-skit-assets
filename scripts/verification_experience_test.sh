@@ -25,14 +25,15 @@ echo "The APP_URL is: $APP_URL"
 set -e
 EXIT_CODE=0
 
+PASSED="false"
 if [ -f "$exp_test_path" ]; then
   cd ./scripts
   source "./$exp_test_script" || EXIT_CODE=$?
   if [ $EXIT_CODE == 0 ]; then
+    PASSED="true"
     pass_msg="Skit Experience Test Passed :white_check_mark:"
     echo $pass_msg
     source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$pass_msg" "false"
-    exit 0
   else
     fail_msg="Skit Experience Test Failed"
     echo $fail_msg
@@ -48,4 +49,18 @@ else
   msg="$msg :spinning-siren:"
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$msg"
   exit 1
+fi
+
+set -e
+EXIT_CODE=0
+if [ "$PASSED" == "true" ]; then
+  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/skit_registration.sh")
+  echo "Beginning skit registration..."
+  register_skit
+  if [ $REG_EXIT != 0 ]; then
+    msg="Skit registration failed. Check the starter-kit-registration Tekton pipeline logs under DevOps Toolchains for details."
+    fail_msg="$msg :spinning-siren:"
+    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
+    exit 1
+  fi
 fi

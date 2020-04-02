@@ -1,6 +1,6 @@
 #!/bin/bash
 # uncomment to debug the script wherever it is used
-set -x
+# set -x
 
 exp_test_script=experience_test.sh
 exp_test_path=./scripts/$exp_test_script
@@ -58,7 +58,7 @@ if [ "$PASSED" == "true" ]; then
   echo "Beginning skit registration..."
   register_skit
   if [ $REG_EXIT != 0 ]; then
-    msg="Skit registration failed. Check the Tekton registration pipeline logs for details."
+    msg="Skit registration failed. Check the starter-kit-registration Tekton pipeline logs under DevOps Toolchains for details."
     fail_msg="$msg :spinning-siren:"
     source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
     exit 1

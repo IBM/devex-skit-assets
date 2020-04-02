@@ -51,7 +51,10 @@ else
   exit 1
 fi
 
+set -e
+EXIT_CODE=0
 if [ "$PASSED" == "true" ]; then
+  echo "Beginning skit registration..."
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/skit_registration.sh") || EXIT_CODE=$?
   if [ $EXIT_CODE != 0 ]; then
     msg="Skit registration failed. Check the Tekton registration pipeline logs for details."

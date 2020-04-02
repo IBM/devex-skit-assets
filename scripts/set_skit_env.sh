@@ -22,6 +22,8 @@ echo "PAGERDUTY_EVENTS_API_URL=${PAGERDUTY_EVENTS_API_URL}" >> ./build.propertie
 echo "PAGERDUTY_API_TOKEN=${PAGERDUTY_API_TOKEN}" >> ./build.properties
 echo "PAGERDUTY_SVC_NAME=${PAGERDUTY_SVC_NAME}" >> ./build.properties
 echo "ENABLE_PD_ALERTS=${ENABLE_PD_ALERTS}" >> ./build.properties
+echo "SKIT_REG_ENDPOINT=${SKIT_REG_ENDPOINT}" >> ./build.properties
+echo "SKIT_REG_AUTH_TOKEN=${SKIT_REG_AUTH_TOKEN}" >> ./build.properties
 
 if [ "$DEPLOY_TARGET" == "cf" ]; then
     echo "ENABLED_CF=${ENABLED_CF}" >> ./build.properties

@@ -53,7 +53,7 @@ fi
 
 set -e
 EXIT_CODE=0
-if [ "$PASSED" == "true" ]; then
+if [ "$PASSED" == "true" ] && [ "$DEPLOY_TARGET" != "cf" ]; then
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/skit_registration.sh")
   echo "Beginning skit registration..."
   register_skit

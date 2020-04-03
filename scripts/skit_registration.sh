@@ -19,11 +19,11 @@ function register_skit {
         "ref": "refs/heads/'${GIT_BRANCH}'",
         "after": "'${GIT_COMMIT}'",
         "repository": {
-            "name": "'${APP_NAME}'",
-            "full_name": "IBM/'${APP_NAME}'",
-            "url": "https://github.com/IBM/'${APP_NAME}'",
-            "html_url": "https://github.com/IBM/'${APP_NAME}'",
-            "statuses_url": "https://api.github.com/repos/IBM/'${APP_NAME}'/statuses/{sha}"
+            "name": "'${SKIT_NAME}'",
+            "full_name": "IBM/'${SKIT_NAME}'",
+            "url": "https://github.com/IBM/'${SKIT_NAME}'",
+            "html_url": "https://github.com/IBM/'${SKIT_NAME}'",
+            "statuses_url": "https://api.github.com/repos/IBM/'${SKIT_NAME}'/statuses/{sha}"
         },
         "skit_verified": "true"
     }' >> $OUT_FILE_RUN

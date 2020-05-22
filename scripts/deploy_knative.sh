@@ -5,7 +5,7 @@
 export PATH="downloads:$PATH"
 
 echo "Check cluster availability"
-IP_ADDR=$(ibmcloud cs workers ${PIPELINE_KUBERNETES_CLUSTER_NAME} | grep normal | head -n 1 | awk '{ print $2 }')
+IP_ADDR=$(ibmcloud ks workers --cluster ${PIPELINE_KUBERNETES_CLUSTER_NAME} | grep normal | head -n 1 | awk '{ print $2 }')
 if [ -z $IP_ADDR ]; then
     echo "$PIPELINE_KUBERNETES_CLUSTER_NAME not created or workers not ready"
     exit 1
@@ -13,7 +13,7 @@ fi
 
 # Check for installation of Knative addon
 echo "Check Knative availability"
-KNATIVE_INSTALLED=$(ibmcloud cs cluster addons --cluster ${PIPELINE_KUBERNETES_CLUSTER_NAME} --json | jq '.[].name?|select(. == "knative")')
+KNATIVE_INSTALLED=$(ibmcloud ks cluster addons --cluster ${PIPELINE_KUBERNETES_CLUSTER_NAME} --json | jq '.[].name?|select(. == "knative")')
 if [ -z $KNATIVE_INSTALLED ]; then
     echo "Knative is required but is not installed in this cluster. Install the Knative add-on and retry. Note that the Knative add-on is not supported on lite clusters."
     exit 1

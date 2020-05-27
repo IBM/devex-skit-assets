@@ -34,3 +34,6 @@ base:
 istio:
   enabled: false
   weight: 100
+services:
+  visualRecognition:
+    secretKeyRef: binding-governator-visrec

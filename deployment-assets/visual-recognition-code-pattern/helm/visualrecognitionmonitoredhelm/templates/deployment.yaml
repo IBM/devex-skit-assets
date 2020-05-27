@@ -25,6 +25,12 @@ spec:
     spec:
       containers:
       - env:
+        - name: service_watson_visual_recognition
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.services.visualRecognition.secretKeyRef}}
+              key: binding
+              optional: true
         - name: PORT
           value : "{{ .Values.service.servicePort }}"
         - name: APPLICATION_NAME

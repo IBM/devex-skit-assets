@@ -1,4 +1,4 @@
 apiVersion: v1
 description: A Helm chart for Kubernetes
-name: mernappmonitoredhelm
+name: visualrecognitionmonitoredhelm
 version: 1.0.0

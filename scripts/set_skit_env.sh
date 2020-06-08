@@ -17,6 +17,7 @@ echo "DEPLOY_TARGET=${DEPLOY_TARGET}" >> ./build.properties
 
 echo "SLACK_WEBHOOK=${SLACK_WEBHOOK}" >> ./build.properties
 echo "OWNER_SLACK_CHANNEL=${OWNER_SLACK_CHANNEL}" >> ./build.properties
+echo "DEVX_SLACK_CHANNEL=devx-skit-monitoring" >> ./build.properties
 echo "PAGERDUTY_API_URL=${PAGERDUTY_API_URL}" >> ./build.properties
 echo "PAGERDUTY_EVENTS_API_URL=${PAGERDUTY_EVENTS_API_URL}" >> ./build.properties
 echo "PAGERDUTY_API_TOKEN=${PAGERDUTY_API_TOKEN}" >> ./build.properties

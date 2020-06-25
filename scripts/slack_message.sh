@@ -1,6 +1,6 @@
 #!/bin/bash
 # uncomment to debug the script wherever it is used
-set -x
+# set -x
 
 export SLACK_MSG=$1
 export NOTIFY=${2:-"true"}

@@ -1,6 +1,6 @@
 #!/bin/bash
 # uncomment to debug the script wherever it is used
-# set -x
+set -x
 
 export SLACK_MSG=$1
 export NOTIFY=${2:-"true"}
@@ -16,19 +16,17 @@ if [ "${NOTIFY}" == "true" ]; then
     export TEXT="$TEXT @here"
 fi
 
-curl -s -X POST --data-urlencode 'payload={"channel": "#'"$OWNER_SLACK_CHANNEL"'", 
-                                "username": "DevX Skit Monitor", 
+curl -s -X POST --data-urlencode 'payload={"username": "DevX Skit Monitor", 
                                 "text": "'"$TEXT"'", 
                                 "link_names": "true",
                                 "attachments": [], "icon_emoji": ":police_car:"}' \
-    $SLACK_WEBHOOK
+    $OWNER_SLACK_CHANNEL_WEBHOOK
 
 # also send to the DevX slack channel if not already
-if [ "${OWNER_SLACK_CHANNEL}" != "${DEVX_SLACK_CHANNEL}" ]; then
-    curl -s -X POST --data-urlencode 'payload={"channel": "#'"$DEVX_SLACK_CHANNEL"'", 
-                                    "username": "DevX Skit Monitor", 
+if [ "${OWNER_SLACK_CHANNEL_WEBHOOK}" != "${DEVX_SLACK_CHANNEL_WEBHOOK}" ]; then
+    curl -s -X POST --data-urlencode 'payload={"username": "DevX Skit Monitor", 
                                     "text": "'"$TEXT"'", 
                                     "link_names": "true",
                                     "attachments": [], "icon_emoji": ":police_car:"}' \
-        $SLACK_WEBHOOK
+    $DEVX_SLACK_CHANNEL_WEBHOOK
 fi

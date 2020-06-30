@@ -48,7 +48,7 @@ function register_skit {
     echo ""
     echo "Checking pipeline run status..."
     SUCCESS="false"
-    for ITERATION in {1..30}
+    for ITERATION in {1..90}
     do
         sleep 10
 

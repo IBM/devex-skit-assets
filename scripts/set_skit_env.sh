@@ -15,8 +15,8 @@ echo "DEVX_SKIT_ASSETS_GIT_URL_RAW=${DEVX_SKIT_ASSETS_GIT_URL_RAW}" >> ./build.p
 echo "DEVX_SKIT_ASSETS_GIT_URL_CODE=${DEVX_SKIT_ASSETS_GIT_URL_CODE}" >> ./build.properties
 echo "DEPLOY_TARGET=${DEPLOY_TARGET}" >> ./build.properties
 
-echo "SLACK_WEBHOOK=${SLACK_WEBHOOK}" >> ./build.properties
-echo "OWNER_SLACK_CHANNEL=${OWNER_SLACK_CHANNEL}" >> ./build.properties
+echo "OWNER_SLACK_CHANNEL_WEBHOOK=${OWNER_SLACK_CHANNEL_WEBHOOK}" >> ./build.properties
+echo "DEVX_SLACK_CHANNEL_WEBHOOK=${DEVX_SLACK_CHANNEL_WEBHOOK}" >> ./build.properties
 echo "PAGERDUTY_API_URL=${PAGERDUTY_API_URL}" >> ./build.properties
 echo "PAGERDUTY_EVENTS_API_URL=${PAGERDUTY_EVENTS_API_URL}" >> ./build.properties
 echo "PAGERDUTY_API_TOKEN=${PAGERDUTY_API_TOKEN}" >> ./build.properties

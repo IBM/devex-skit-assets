@@ -1,0 +1,15 @@
+---
+applications:
+- instances: 1
+  timeout: 180
+  name: speechtotextmonitoredcf
+  buildpack: sdk-for-nodejs
+  command: npm start
+  disk_quota: 1G
+  memory: 128MB
+  domain: mybluemix.net
+  host: speech-to-text-monitored-cf
+  services:
+    - governator-speech2text-98970
+  env:
+    OPTIMIZE_MEMORY: true

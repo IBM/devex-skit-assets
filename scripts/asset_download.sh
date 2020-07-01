@@ -62,6 +62,10 @@ case "$SKIT_NAME" in
       ;;
       visual-recognition-code-pattern-code-monitor) export APP_NAME="vis-rec-code-pattern"
       ;;
+      text-to-speech-code-pattern) export APP_NAME="text2speech-code-pattern"
+      ;;
+      speech-to-text-code-pattern) export APP_NAME="speech2text-code-pattern"
+      ;;
       *) echo "Using original skit name as app name"
 esac
 echo "Using APP_NAME=${APP_NAME}"

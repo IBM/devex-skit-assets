@@ -60,6 +60,8 @@ ls -al
 case "$SKIT_NAME" in
       natural-language-understanding-code-pattern) export APP_NAME="nlu-code-pattern"
       ;;
+      visual-recognition-code-pattern-code-monitor) export APP_NAME="vis-rec-code-pattern"
+      ;;
       *) echo "Using original skit name as app name"
 esac
 echo "Using APP_NAME=${APP_NAME}"

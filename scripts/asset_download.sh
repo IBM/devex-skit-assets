@@ -56,5 +56,19 @@ fi
 rm -r ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_RELEASE}
 ls -al
 
+# some skit names are too long, so use short names where needed
+case "$SKIT_NAME" in
+      natural-language-understanding-code-pattern) export APP_NAME="nlu-code-pattern"
+      ;;
+      visual-recognition-code-pattern-code-monitor) export APP_NAME="vis-rec-code-pattern"
+      ;;
+      text-to-speech-code-pattern) export APP_NAME="text2speech-code-pattern"
+      ;;
+      speech-to-text-code-pattern) export APP_NAME="speech2text-code-pattern"
+      ;;
+      *) echo "Using original skit name as app name"
+esac
+echo "Using APP_NAME=${APP_NAME}"
+
 echo "APP_NAME=${APP_NAME}" >> $ARCHIVE_DIR/build.properties
 echo "DEVX_GIT_REPO_NAME=${DEVX_GIT_REPO_NAME}" >> $ARCHIVE_DIR/build.properties

@@ -2,12 +2,12 @@
 applications:
 - instances: 1
   timeout: 180
-  name: noderedappmonitoredcf
+  name: chuckcnoderedappmonitoredcf
   buildpack: sdk-for-nodejs
   command: npm start
   disk_quota: 1G
   memory: 128MB
   domain: mybluemix.net
-  host: node-red-app-devx-monitored-cf
+  host: chuckc-node-red-app-devx-monitored-cf
   services:
     - governator-cloudant

@@ -10,7 +10,7 @@ source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/asset_download.sh")
 
 # spring projects require a maven build for CF
 if [ "${DEPLOY_TARGET}" == "cf" ]; then
-    platform=$(curl --silent "https://cloud.ibm.com/developer/api/applications/v1/starters" | jq --unbuffered -r --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
+    platform=$(curl --silent "https://global.devx.cloud.ibm.com/appmanager/v1/starters" | jq --unbuffered -r --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
     case "$platform" in
     spring | java) echo "Building with Maven" && mvn -B package
     ;;

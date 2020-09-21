@@ -23,7 +23,7 @@ fi
 echo "The APP_URL is: $APP_URL"
 
 # install python3, pip
-apt-get -qq update && apt-get -qq install -y python3
+apt-get -qq update && apt-get -qq install -y python3 python3-venv python3-pip
 
 set -e
 EXIT_CODE=0

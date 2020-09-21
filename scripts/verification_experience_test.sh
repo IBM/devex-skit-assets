@@ -22,6 +22,9 @@ if [ "$DEPLOY_TARGET" == "knative" ]; then
 fi
 echo "The APP_URL is: $APP_URL"
 
+# install python3, pip
+sudo yum install python3 pip
+
 set -e
 EXIT_CODE=0
 

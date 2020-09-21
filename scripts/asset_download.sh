@@ -40,7 +40,7 @@ esac
 # If we have a mappings json, we need to make sure it goes to the right place for the respective language
 if [ -f "${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_RELEASE}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json" ]; then
 
-    platform=$(curl --silent "https://cloud.ibm.com/developer/api/applications/v1/starters" | jq --unbuffered -r --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
+    platform=$(curl --silent "https://global.devx.cloud.ibm.com/appmanager/v1/starters" | jq --unbuffered -r --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
     case "$platform" in
       python | django | node) mkdir -p ./server/config && mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_RELEASE}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ./server/config/
       ;;

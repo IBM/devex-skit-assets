@@ -31,20 +31,21 @@ EXIT_CODE=0
 PASSED="false"
 if [ -f "$exp_test_path" ]; then
   cd ./scripts
-  source "./$exp_test_script" || EXIT_CODE=$?
-  if [ $EXIT_CODE == 0 ]; then
-    PASSED="true"
-    pass_msg=":white_check_mark: Skit Experience Test Passed"
-    echo $pass_msg
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$pass_msg" "false"
-  else
-    fail_msg="Skit Experience Test Failed"
-    echo $fail_msg
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$fail_msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
-    fail_msg=":spinning-siren: $fail_msg "
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
-    exit 1
-  fi
+  for i in {1..3}
+  do
+    echo "Beginning Skit Experience Test attempt $i"
+    source "./$exp_test_script" || EXIT_CODE=$?
+    if [ $EXIT_CODE == 0 ]; then
+      PASSED="true"
+      pass_msg=":white_check_mark: Skit Experience Test Passed"
+      echo $pass_msg
+      source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$pass_msg" "false"
+      break
+    else
+      echo "Skit Experience Test attempt $i failed"
+      PASSED="false"
+    fi
+  done
 else
   msg="Skit Experience Test script not found for skit $APP_NAME."
   echo $msg
@@ -56,6 +57,16 @@ fi
 
 set -e
 EXIT_CODE=0
+
+if [ "$PASSED" == "false" ]; then
+  fail_msg="Skit Experience Test Failed"
+  echo $fail_msg
+  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$fail_msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
+  fail_msg=":spinning-siren: $fail_msg "
+  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
+  exit 1
+fi
+
 if [ "$PASSED" == "true" ] && [ "$DEPLOY_TARGET" != "cf" ]; then
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/skit_registration.sh")
   echo "Beginning skit registration..."

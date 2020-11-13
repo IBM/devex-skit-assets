@@ -12,7 +12,7 @@ pd_severity=error
 # app URL isnt getting propagated from previous stages for some reason, so have to figure it out here
 if [ "$DEPLOY_TARGET" == "cf" ]; then
   export CF_APP_NAME=$APP_NAME-monitored-cf
-  export APP_URL=http://$(cf app $CF_APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
+  export APP_URL=https://$(cf app $CF_APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
 fi
 if [ "$DEPLOY_TARGET" == "helm" ]; then
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/get_app_url_helm.sh")

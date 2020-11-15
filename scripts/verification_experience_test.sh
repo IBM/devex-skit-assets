@@ -44,6 +44,7 @@ if [ -f "$exp_test_path" ]; then
     else
       echo "Skit Experience Test attempt $i failed"
       PASSED="false"
+      EXIT_CODE=0
     fi
   done
 else

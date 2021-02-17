@@ -31,9 +31,6 @@ fi
 if [ "$DEPLOY_TARGET" == "helm" ]; then
     echo "ENABLED_HELM=${ENABLED_HELM}" >> ./build.properties
 fi
-if [ "$DEPLOY_TARGET" == "knative" ]; then
-    echo "ENABLED_KNATIVE=${ENABLED_KNATIVE}" >> ./build.properties
-fi
 
 echo "File 'build.properties' created for passing env variables to subsequent pipeline jobs:"
 cat ./build.properties | grep -v -i password

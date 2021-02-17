@@ -31,8 +31,6 @@ case "$DEPLOY_TARGET" in
     ;;
     cf) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_RELEASE}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ./
     ;;
-    knative) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_RELEASE}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/service.yaml ./
-    ;;
     *) echo "FAILED TO PLACE helm chart, manifest.yaml, or service.yaml"
        exit 1
 esac

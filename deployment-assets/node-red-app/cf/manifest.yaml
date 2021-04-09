@@ -3,7 +3,7 @@ applications:
 - instances: 1
   timeout: 180
   name: noderedappmonitoredcf
-  buildpack: sdk-for-nodejs
+  buildpack: nodejs_buildpack
   command: npm start
   disk_quota: 1G
   memory: 128MB

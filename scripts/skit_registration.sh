@@ -4,11 +4,10 @@
 
 function register_skit {
     OUT_FILE_RUN=run-pipeline-output.txt
-    export SKIT_NAME=(${GIT_URL##*/})
-    export SKIT_URL=(${GIT_URL%%.git}) # strips .git off the end
-    export SKIT_NAME=(${SKIT_NAME%%.*})
+    export SKIT_NAME=${APP_NAME%"-monitored-cf"}
+    export SKIT_URL="https://github.com/IBM/${SKIT_NAME}"
 
-    echo "Repository URL: $GIT_URL"
+    echo "Repository URL: $SKIT_URL"
     echo "Triggering starter kit registration for $SKIT_NAME"
     curl -s -X POST \
         ${SKIT_REG_ENDPOINT} \
@@ -16,8 +15,8 @@ function register_skit {
         -H 'content-type: application/json' \
         -H 'x-auth-token: '${SKIT_REG_AUTH_TOKEN}'' \
         -d '{
-        "ref": "refs/heads/'${GIT_BRANCH}'",
-        "after": "'${GIT_COMMIT}'",
+        "ref": "refs/heads/'${SKIT_GIT_BRANCH}'",
+        "after": "'${SKIT_GIT_COMMIT}'",
         "repository": {
             "name": "'${SKIT_NAME}'",
             "full_name": "IBM/'${SKIT_NAME}'",

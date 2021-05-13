@@ -26,7 +26,7 @@ EXIT_CODE=0
 
 PASSED="false"
 if [ -f "$exp_test_path" ]; then
-  cd ./scripts
+  cd $SKIT_DIR/scripts
   for i in {1..3}
   do
     echo "Beginning Skit Experience Test attempt $i"

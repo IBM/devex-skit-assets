@@ -5,7 +5,7 @@
 export SLACK_MSG=$1
 export NOTIFY=${2:-"true"}
 export IBM_CLOUD_REGION="${IBM_CLOUD_REGION:-us-south}"
-export LOGS_URL="https://cloud.ibm.com/devops/pipelines/$PIPELINE_ID/$PIPELINE_STAGE_ID/$IDS_JOB_ID?env_id=ibm:yp:$IBM_CLOUD_REGION"
+export LOGS_URL="https://devops-api.$PIPELINE_REGION.devops.cloud.ibm.com/v1/tekton-pipelines/$PIPELINE_ID/runs/$PIPELINE_RUN_ID/$STEP_LOG_ID/logs"
 export LINKS="<"$LOGS_URL"|LOGS> || <"$SKIT_URL"|REPO>"
 if [[ -n $APP_URL ]]; then
     export LINKS="$LINKS || <"$APP_URL"|APP> "

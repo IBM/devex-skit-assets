@@ -21,7 +21,7 @@ if [ -f "${DEVX_SKIT_ASSETS_GIT_REPO_DIR}/deployment-assets/${SKIT_NAME}/${DEPLO
 
     platform=$(curl --silent "https://global.devx.cloud.ibm.com/appmanager/v1/starters" | jq --unbuffered -r --arg skit_url "$SKIT_URL" '.starters[] | select(.repo_url ==$skit_url) | .platforms.server[0] ')
     case "$platform" in
-      python | django | node) mkdir -p ./server/config && mv ${DEVX_SKIT_ASSETS_GIT_REPO_DIR}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ${SKIT_DIR}/server/config
+      python | django | node) mkdir -p ${SKIT_DIR}/server/config && mv ${DEVX_SKIT_ASSETS_GIT_REPO_DIR}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ${SKIT_DIR}/server/config
       ;;
       swift) mv ${DEVX_SKIT_ASSETS_GIT_REPO_DIR}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/mappings.json ${SKIT_DIR}/config/;
       ;;

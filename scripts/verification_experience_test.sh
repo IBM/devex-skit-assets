@@ -3,7 +3,8 @@
 # set -x
 
 exp_test_script=experience_test.sh
-exp_test_path=./scripts/$exp_test_script
+SKIT_DIR=${SKIT_DIR:-"."}
+exp_test_path=$SKIT_DIR/scripts/$exp_test_script
 pd_evt_action=trigger
 pd_class="Skit Experience Test"
 pd_svc_name="DevX Skit Monitor"

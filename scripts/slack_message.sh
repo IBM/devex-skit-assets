@@ -3,7 +3,7 @@
 # set -x
 
 export SLACK_MSG=$1
-export NOTIFY=${2:-"true"}
+export NOTIFY=${2:-"false"}
 export IBM_CLOUD_REGION="${IBM_CLOUD_REGION:-us-south}"
 export LOGS_URL="https://devops-api.$PIPELINE_REGION.devops.cloud.ibm.com/v1/tekton-pipelines/$PIPELINE_ID/runs/$PIPELINE_RUN_ID/$STEP_LOG_ID/logs"
 export LINKS="<"$LOGS_URL"|LOGS> || <"$SKIT_URL"|REPO>"

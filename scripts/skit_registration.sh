@@ -5,7 +5,7 @@
 function register_skit {
     OUT_FILE_RUN=run-pipeline-output.txt
     export SKIT_NAME=(${GIT_URL##*/})
-    export SKIT_URL=(${GIT_URL%%.git}) # strips .git off the end
+    export SKIT_URL=${GIT_URL%%.git} # strips .git off the end
     export SKIT_NAME=(${SKIT_NAME%%.*})
 
     echo "Repository URL: $GIT_URL"

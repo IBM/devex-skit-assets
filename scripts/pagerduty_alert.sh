@@ -9,7 +9,7 @@ export PD_SVC_NAME="$4"
 export SEVERITY=$5
 
 export IBM_CLOUD_REGION="${IBM_CLOUD_REGION:-us-south}"
-export LOGS_URL="https://cloud.ibm.com/devops/pipelines/$PIPELINE_ID/$PIPELINE_STAGE_ID/$IDS_JOB_ID?env_id=ibm:yp:$IBM_CLOUD_REGION"
+export LOGS_URL="$PIPELINE_RUN_URL"
 
 if [ "$ENABLE_PD_ALERTS" == "true" ]; then
     curl -X POST -H 'Content-Type: application/json' \

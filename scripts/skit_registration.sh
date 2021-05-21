@@ -15,8 +15,8 @@ function register_skit {
         -H 'content-type: application/json' \
         -H 'x-auth-token: '${SKIT_REG_AUTH_TOKEN}'' \
         -d '{
-        "ref": "refs/heads/'${GIT_BRANCH}'",
-        "after": "'${GIT_COMMIT}'",
+        "ref": "refs/heads/'${SKIT_GIT_BRANCH}'",
+        "after": "'${SKIT_GIT_COMMIT}'",
         "repository": {
             "name": "'${SKIT_NAME}'",
             "full_name": "IBM/'${SKIT_NAME}'",

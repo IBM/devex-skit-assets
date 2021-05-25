@@ -1,4 +1,4 @@
 apiVersion: v1
 description: A Helm chart for Kubernetes
-name: pythonflaskmonitoredhelm
+name: pythondjangoappmonitoredhelm
 version: 1.0.0

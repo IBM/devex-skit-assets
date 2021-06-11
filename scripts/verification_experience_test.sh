@@ -3,7 +3,7 @@
 # set -x
 
 exp_test_script=experience_test.sh
-SKIT_DIR=${SKIT_DIR:-"."}
+SKIT_DIR=${SKIT_DIR:-"."} # use . if skit_dir is an empty string
 exp_test_path=$SKIT_DIR/scripts/$exp_test_script
 pd_evt_action=trigger
 pd_class="Skit Experience Test"

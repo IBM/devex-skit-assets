@@ -34,7 +34,9 @@ if [ -f "$exp_test_path" ]; then
       PASSED="true"
       pass_msg=":white_check_mark: Skit Experience Test Passed"
       echo $pass_msg
-      source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$pass_msg" "false"
+      if [ $ENABLE_SLACK_ALERTS == "true" ]; then
+        source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$pass_msg" "false"
+      fi
       break
     else
       echo "Skit Experience Test attempt $i failed"
@@ -45,9 +47,13 @@ if [ -f "$exp_test_path" ]; then
 else
   msg="Skit Experience Test script not found for skit $APP_NAME."
   echo $msg
-  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
+  if [ "$ENABLE_PD_ALERTS" == "true" ]; then
+    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
+  fi
   msg=":spinning-siren: $msg "
-  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$msg"
+  if [ $ENABLE_SLACK_ALERTS == "true" ]; then
+    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$msg"
+  fi
   exit 1
 fi
 
@@ -57,9 +63,16 @@ EXIT_CODE=0
 if [ "$PASSED" == "false" ]; then
   fail_msg="Skit Experience Test Failed"
   echo $fail_msg
-  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$fail_msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
+  
+  if [ "$ENABLE_PD_ALERTS" == "true" ]; then
+    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$fail_msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
+  fi
+  
   fail_msg=":spinning-siren: $fail_msg "
-  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
+
+  if [ $ENABLE_SLACK_ALERTS == "true" ]; then
+    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
+  fi
   exit 1
 fi
 
@@ -70,7 +83,9 @@ if [ "$PASSED" == "true" ] && [ "$DEPLOY_TARGET" != "cf" ]; then
   if [ $REG_EXIT != 0 ]; then
     msg="Skit registration failed. Check the starter-kit-registration Tekton pipeline logs under DevOps Toolchains for details."
     fail_msg=":spinning-siren: $msg"
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
+    if [ $ENABLE_SLACK_ALERTS == "true" ]; then
+      source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
+    fi
     exit 1
   fi
 fi

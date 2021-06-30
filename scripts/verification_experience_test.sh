@@ -76,7 +76,7 @@ if [ "$PASSED" == "false" ]; then
   exit 1
 fi
 
-if [ "$PASSED" == "true" ] && [ "$DEPLOY_TARGET" != "cf" ]; then
+if [ "$PASSED" == "true" ] && [ "$DEPLOY_TARGET" != "cf" ] && [ "$REGISTER_SKIT == "true" ]; then
   source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/skit_registration.sh")
   echo "Beginning skit registration..."
   register_skit

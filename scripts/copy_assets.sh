@@ -2,7 +2,7 @@
 # uncomment to debug the script wherever it is used
 # set -x
 
-export SKIT_URL="https://github.com/IBM/${SKIT_NAME%"-monitored-cf"}"
+export SKIT_URL="https://github.com/IBM/$SKIT_NAME"
 
 case "$DEPLOY_TARGET" in
     helm) mv ${DEVX_SKIT_ASSETS_GIT_REPO_DIR}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ${SKIT_DIR}/chart

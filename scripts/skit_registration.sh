@@ -4,7 +4,6 @@
 
 function register_skit {
     OUT_FILE_RUN=run-pipeline-output.txt
-    export SKIT_NAME=${APP_NAME%"-monitored-cf"}
     export SKIT_URL="https://github.com/IBM/${SKIT_NAME}"
 
     echo "Repository URL: $SKIT_URL"

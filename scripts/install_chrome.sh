@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Versions
-CHROME_DRIVER_VERSION=`curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_95`
+CHROME_DRIVER_VERSION=`curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_97`
 
 # Remove existing downloads and binaries so we can start from scratch.
 sudo apt-get remove google-chrome-stable

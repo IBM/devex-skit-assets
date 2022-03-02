@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Versions
-CHROME_DRIVER_VERSION=`curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_99`
-
 # Remove existing downloads and binaries so we can start from scratch.
 sudo apt-get remove google-chrome-stable
 rm ~/chromedriver_linux64.zip
@@ -17,6 +14,10 @@ sudo curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-k
 sudo echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
 sudo apt-get -y update
 sudo apt-get -y install google-chrome-stable
+
+BROWSER_VERSION=$(google-chrome --version | grep -oP --max-count=1 '[0-9]+' | head -1)
+# Versions
+CHROME_DRIVER_VERSION="curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$BROWSER_VERSION"
 
 # Install ChromeDriver.
 wget -N https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/

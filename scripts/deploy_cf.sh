@@ -4,6 +4,7 @@
 
 # Push app
 if ! cf app "$CF_APP"; then  
+  cat ./manifest.yaml
   cf push "$CF_APP" -f ./manifest.yaml
 else
   OLD_CF_APP="${CF_APP}-OLD-$(date +"%s")"

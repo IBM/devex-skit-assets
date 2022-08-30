@@ -51,7 +51,7 @@ set -e
 EXIT_CODE=0
 
 if [ "$PASSED" == "false" ]; then
-  fail_msg="Skit Experience Test Failed after multiple"
+  fail_msg="Skit Experience Test Failed after multiple attempts"
   echo $fail_msg
   exit 1
 fi

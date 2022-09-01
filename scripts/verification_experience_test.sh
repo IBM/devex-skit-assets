@@ -34,9 +34,6 @@ if [ -f "$exp_test_path" ]; then
       PASSED="true"
       pass_msg=":white_check_mark: Skit Experience Test Passed"
       echo $pass_msg
-      if [ $ENABLE_SLACK_ALERTS == "true" ]; then
-        source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$pass_msg" "false"
-      fi
       break
     else
       echo "Skit Experience Test attempt $i failed"
@@ -47,13 +44,6 @@ if [ -f "$exp_test_path" ]; then
 else
   msg="Skit Experience Test script not found for skit $APP_NAME."
   echo $msg
-  if [ "$ENABLE_PD_ALERTS" == "true" ]; then
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
-  fi
-  msg=":spinning-siren: $msg "
-  if [ $ENABLE_SLACK_ALERTS == "true" ]; then
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$msg"
-  fi
   exit 1
 fi
 
@@ -61,31 +51,7 @@ set -e
 EXIT_CODE=0
 
 if [ "$PASSED" == "false" ]; then
-  fail_msg="Skit Experience Test Failed"
+  fail_msg="Skit Experience Test Failed after multiple attempts"
   echo $fail_msg
-  
-  if [ "$ENABLE_PD_ALERTS" == "true" ]; then
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/pagerduty_alert.sh") "$fail_msg" "$pd_evt_action" "$pd_class" "$pd_svc_name" "$pd_severity"
-  fi
-  
-  fail_msg=":spinning-siren: $fail_msg "
-
-  if [ $ENABLE_SLACK_ALERTS == "true" ]; then
-    source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
-  fi
   exit 1
-fi
-
-if [ "$PASSED" == "true" ] && [ "$DEPLOY_TARGET" != "cf" ] && [ "$REGISTER_SKIT" == "true" ]; then
-  source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/skit_registration.sh")
-  echo "Beginning skit registration..."
-  register_skit
-  if [ $REG_EXIT != 0 ]; then
-    msg="Skit registration failed. Check the starter-kit-registration Tekton pipeline logs under DevOps Toolchains for details."
-    fail_msg=":spinning-siren: $msg"
-    if [ $ENABLE_SLACK_ALERTS == "true" ]; then
-      source <(curl -sSL "$DEVX_SKIT_ASSETS_GIT_URL_RAW/scripts/slack_message.sh") "$fail_msg"
-    fi
-    exit 1
-  fi
 fi

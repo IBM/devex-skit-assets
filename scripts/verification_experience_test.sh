@@ -1,6 +1,8 @@
 #!/bin/bash
-# uncomment to debug the script wherever it is used
-# set -x
+
+if [ $PIPELINE_DEBUG == 1 ]; then
+    set -x
+fi
 
 exp_test_script=experience_test.sh
 SKIT_DIR=${SKIT_DIR:-"."} # use . if skit_dir is an empty string

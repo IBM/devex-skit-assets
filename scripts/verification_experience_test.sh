@@ -22,6 +22,7 @@ apt-get -qq update && apt-get -qq install -y python3 python3-venv python3-pip
 
 set -e
 EXIT_CODE=0
+export VERIFY_EXIT=0
 
 PASSED="false"
 if [ -f "$exp_test_path" ]; then
@@ -34,6 +35,7 @@ if [ -f "$exp_test_path" ]; then
       PASSED="true"
       pass_msg=":white_check_mark: Skit Experience Test Passed"
       echo $pass_msg
+      export VERIFY_EXIT=0
       break
     else
       echo "Skit Experience Test attempt $i failed"
@@ -47,11 +49,8 @@ else
   exit 1
 fi
 
-set -e
-EXIT_CODE=0
-
 if [ "$PASSED" == "false" ]; then
   fail_msg="Skit Experience Test Failed after multiple attempts"
   echo $fail_msg
-  exit 1
+  export VERIFY_EXIT=1
 fi

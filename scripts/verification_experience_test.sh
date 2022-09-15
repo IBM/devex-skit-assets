@@ -13,7 +13,7 @@ pd_severity=error
 # app URL isnt getting propagated from previous stages for some reason, so have to figure it out here
 if [ "$DEPLOY_TARGET" == "cf" ] && [ -z "$APP_URL" ]; then
   ibmcloud target -o "$CF_ORG" -s "$CF_SPACE"
-  export APP_URL=https://$(cf app $APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
+  export APP_URL=https://$(ibmcloud cf app $APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
 fi
 
 echo "The APP_URL is: $APP_URL"

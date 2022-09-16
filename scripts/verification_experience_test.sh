@@ -1,6 +1,8 @@
 #!/bin/bash
-# uncomment to debug the script wherever it is used
-# set -x
+
+if [ $PIPELINE_DEBUG == 1 ]; then
+    set -x
+fi
 
 exp_test_script=experience_test.sh
 SKIT_DIR=${SKIT_DIR:-"."} # use . if skit_dir is an empty string
@@ -12,7 +14,8 @@ pd_severity=error
 
 # app URL isnt getting propagated from previous stages for some reason, so have to figure it out here
 if [ "$DEPLOY_TARGET" == "cf" ] && [ -z "$APP_URL" ]; then
-  export APP_URL=https://$(cf app $APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
+  ibmcloud target -o "$CF_ORG" -s "$CF_SPACE"
+  export APP_URL=https://$(ibmcloud cf app $APP_NAME | grep -e urls: -e routes: | awk '{print $2}')
 fi
 
 echo "The APP_URL is: $APP_URL"
@@ -22,6 +25,7 @@ apt-get -qq update && apt-get -qq install -y python3 python3-venv python3-pip
 
 set -e
 EXIT_CODE=0
+export VERIFY_EXIT=0
 
 PASSED="false"
 if [ -f "$exp_test_path" ]; then
@@ -34,6 +38,7 @@ if [ -f "$exp_test_path" ]; then
       PASSED="true"
       pass_msg=":white_check_mark: Skit Experience Test Passed"
       echo $pass_msg
+      export VERIFY_EXIT=0
       break
     else
       echo "Skit Experience Test attempt $i failed"
@@ -47,11 +52,8 @@ else
   exit 1
 fi
 
-set -e
-EXIT_CODE=0
-
 if [ "$PASSED" == "false" ]; then
   fail_msg="Skit Experience Test Failed after multiple attempts"
   echo $fail_msg
-  exit 1
+  export VERIFY_EXIT=1
 fi

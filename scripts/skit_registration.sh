@@ -1,6 +1,8 @@
 #!/bin/bash
-# uncomment to debug the script wherever it is used
-# set -x
+
+if [ $PIPELINE_DEBUG == 1 ]; then
+    set -x
+fi
 
 function register_skit {
     OUT_FILE_RUN=run-pipeline-output.txt

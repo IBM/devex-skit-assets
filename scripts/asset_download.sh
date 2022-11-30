@@ -29,8 +29,6 @@ ls -al ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_RELEASE}/deployment-assets/$
 case "$DEPLOY_TARGET" in
     helm) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_RELEASE}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ./chart
     ;;
-    cf) mv ${DEVX_GIT_REPO_NAME}-${DEVX_SKIT_ASSETS_GIT_RELEASE}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ./
-    ;;
     *) echo "FAILED TO PLACE helm chart, manifest.yaml, or service.yaml"
        exit 1
 esac

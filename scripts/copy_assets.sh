@@ -7,8 +7,6 @@ export SKIT_URL="https://github.com/IBM/$SKIT_NAME"
 case "$DEPLOY_TARGET" in
     helm) mv ${DEVX_SKIT_ASSETS_GIT_REPO_DIR}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET} ${SKIT_DIR}/chart
     ;;
-    cf) mv ${DEVX_SKIT_ASSETS_GIT_REPO_DIR}/deployment-assets/${SKIT_NAME}/${DEPLOY_TARGET}/manifest.yaml ${SKIT_DIR}
-    ;;
     *) echo "FAILED TO PLACE helm chart, manifest.yaml, or service.yaml"
        exit 1
 esac

@@ -12,7 +12,7 @@ export LINKS="<"$LOGS_URL"|LOGS> || <"$SKIT_URL"|REPO>"
 if [[ -n $APP_URL ]]; then
     export LINKS="$LINKS || <"$APP_URL"|APP> "
 fi
-export TEXT="$LINKS - "$SLACK_MSG" \n\t*"${APP_NAME%"-monitored-cf"}"* on *"$DEPLOY_TARGET"*"
+export TEXT="$LINKS - "$SLACK_MSG" \n\t*"${APP_NAME%"-monitored-helm"}"* on *"$DEPLOY_TARGET"*"
 
 
 if [ "${NOTIFY}" == "true" ]; then

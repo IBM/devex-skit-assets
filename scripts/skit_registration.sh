@@ -38,7 +38,8 @@ function register_skit {
     PIPELINE_ID=$(cat $OUT_FILE_RUN | jq '.pipelineId' | sed -e 's/^"//' -e 's/"$//')
     PIPELINE_RUN_ID=$(cat $OUT_FILE_RUN | jq '.id' | sed -e 's/^"//' -e 's/"$//')
     PIPELINE_INFO_URL="https://cloud.ibm.com/devops/pipelines/tekton/$PIPELINE_ID/runs/$PIPELINE_RUN_ID/skit-register/register?env_id=ibm:yp:us-south"
-    echo "Pipeline info URL: $PIPELINE_INFO_URL"
+    echo "Registration Pipeline info URL: $PIPELINE_INFO_URL"
+    echo "Registration Pipeline API URL: $PIPELINE_API_URL"
 
     IAM_TOKEN=$(ibmcloud iam oauth-tokens --output json | jq '.iam_token')
     TEMP="${IAM_TOKEN%\"}"

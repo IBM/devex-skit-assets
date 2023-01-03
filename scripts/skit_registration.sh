@@ -34,6 +34,7 @@ function register_skit {
     echo ""
     echo ""
 
+    PIPELINE_API_URL=$(cat $OUT_FILE_RUN | jq '.url' | sed -e 's/^"//' -e 's/"$//')
     PIPELINE_ID=$(cat $OUT_FILE_RUN | jq '.pipelineId' | sed -e 's/^"//' -e 's/"$//')
     PIPELINE_RUN_ID=$(cat $OUT_FILE_RUN | jq '.id' | sed -e 's/^"//' -e 's/"$//')
     PIPELINE_INFO_URL="https://cloud.ibm.com/devops/pipelines/tekton/$PIPELINE_ID/runs/$PIPELINE_RUN_ID/skit-register/register?env_id=ibm:yp:us-south"
@@ -51,7 +52,7 @@ function register_skit {
     do
         sleep 10
 
-        STATUS=$(curl -s -X GET -H "Authorization: $IAM_TOKEN" $PIPELINE_INFO_URL | jq '.status.state')
+        STATUS=$(curl -s -X GET -H "Authorization: $IAM_TOKEN" $PIPELINE_API_URL | jq '.status.state')
         TEMP="${STATUS%\"}"
         TEMP="${TEMP#\"}"
         STATUS=${TEMP}
